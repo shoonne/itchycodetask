@@ -1,26 +1,14 @@
-import React, { Component, useState, useReducer } from 'react';
+import React, { Component, useState, useReducer, useEffect } from 'react';
 import { View,Text, TouchableOpacity } from 'react-native';
 import Question from './src/components/Question';
 import QuestionCounter from './src/components/QuestionCounter';
 import color from './constants/Colors';
-
-const questions = [
-  {question:'Hur mycket har din hud kliat, svidit, bränt och stuckit under den senaste veckan?', number:'1'},
-  {question:'Hur generad eller osäker på Dig själv har du varit på grund av din hud under den senaste veckan?', number:'2'},
-  {question:'Hur mycket har din hud hindrat dig från att gå och handla, sköta ditt hem eller trädgård under den senaste veckan?', number:'3'},
-  {question:'Hur mycket har din hud inverkat på din klädsel under den senaste veckan?', number:'4'},
-  {question:'Hur mycket har din hud påverkat sociala aktiviteter eller fritidsaktiviteter under den senaste veckan?', number:'5'},
-  {question:'Hur mycket har din hud förhindrat dig att utöva sport under den senaste veckan?', number:'6'},
-  {question:'Har din hud förhindrat dig att arbeta eller studera under den senaste veckan?', number:'7'},
-  {question:'Hur mycket har din hud varit ett problem under arbetet eller studierna?', number:'8'},
-  {question:"Hur mycket problem har din hud förorsakat dig i relationen med din partner eller någon av dina nära vänner eller släktingar under den senaste veckan?", number:'9'},
-  {question:'Hur mycket problem har din hud förorsakat dig i relationen med din partner eller någon av dina nära vänner eller släktingar under den senaste veckan?', number:'10'},
-]
+import questions from './constants/Questions';
 
 let arr = []
 let question = 0
 
-const initialState = {question: 1, points: 0};
+const initialState = {count:0};
 
 function reducer(state, action) {
   switch (action.type) {
@@ -31,16 +19,28 @@ function reducer(state, action) {
   }
 }
 
+function convertData(arr) {
+var newArr = arr.reduce(function(result, current) {
+  return Object.assign(result, current);
+}, {});
+
+return newArr;
+}
+
 const App = () => {
   var scope = this;
   const [state, dispatch] = useReducer(reducer, initialState);
   const [points, setPoint] = useState(0);
-  const [data, setData] = useState([{}]);
-  const [questionNumber, setQuestionNumber] = useState(`Question:${points}`)
+  const [data, setData] = useState([]);
 
-  if(points >= 10) {
+  if(points === 10) {
     setPoint(0)
+    setData(convertData(data));
   }
+
+  useEffect(() => {
+    console.log(data)
+  })
 
     return (
       <View style={styles.container}>
@@ -48,7 +48,6 @@ const App = () => {
         questionNumber={points}/>
         <Question 
         question={questions[points >= 10 ? 0 : points].question}/>
-        {console.log(data)}
         <View style={{flex:1}}>
         </View>
         <View>
