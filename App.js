@@ -20,7 +20,7 @@ const questions = [
 let arr = []
 let question = 0
 
-const initialState = {count: 0, question: 1};
+const initialState = {question: 1, points: 0};
 
 function reducer(state, action) {
   switch (action.type) {
@@ -32,8 +32,11 @@ function reducer(state, action) {
 }
 
 const App = () => {
+  var scope = this;
   const [state, dispatch] = useReducer(reducer, initialState);
   const [points, setPoint] = useState(0);
+  const [data, setData] = useState([{}]);
+  const [questionNumber, setQuestionNumber] = useState(`Question:${points}`)
 
   if(points >= 10) {
     setPoint(0)
@@ -45,27 +48,39 @@ const App = () => {
         questionNumber={points}/>
         <Question 
         question={questions[points >= 10 ? 0 : points].question}/>
-        {console.log(points)}
+        {console.log(data)}
         <View style={{flex:1}}>
         </View>
         <View>
           <TouchableOpacity 
-          onPress={() => { setPoint(points + 1)}}
+          onPress={() => { 
+            setPoint(points + 1);
+            setData([...data, {['Question ' + (points + 1).toString()]: 3}])
+            }}
           style={styles.btn}>
             <Text style={styles.btnText}>Väldigt Mycket</Text>
           </TouchableOpacity>
           <TouchableOpacity 
-          onPress={() => { setPoint(points + 1)}}
+          onPress={() => {
+            setPoint(points + 1);
+            setData([...data, {['Question ' + (points + 1).toString()]: 2}])
+          }}
           style={styles.btn}>
             <Text style={styles.btnText}>En hel del</Text>
           </TouchableOpacity>
           <TouchableOpacity 
-          onPress={() => { setPoint(points + 1)}}
+          onPress={() => {
+            setPoint(points + 1);
+            setData([...data, {['Question ' + (points + 1).toString()]: 1}])
+          }}
           style={styles.btn}>
             <Text style={styles.btnText}>Lite grann</Text>
           </TouchableOpacity>
           <TouchableOpacity 
-          onPress={() => { setPoint(points + 1)}}
+          onPress={() => {
+            setPoint(points + 1);
+            setData([...data, {['Question ' + (points + 1).toString()]: 0}])
+          }}
           style={styles.btn}>
             <Text style={styles.btnText}>Inte alls</Text>
           </TouchableOpacity>
