@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import color from '../../constants/Colors';
 
 
-const QuestionCounter = () => {
+const QuestionCounter = (props) => {
     return (
         <View style={{flex:1}}>
             <Text 
@@ -17,7 +17,7 @@ const QuestionCounter = () => {
                 height:34
                 }}
             >
-                Fråga 1 av 10
+                Fråga {props.questionNumber} av 10
             </Text>
         </View>
     )

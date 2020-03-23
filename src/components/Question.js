@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import color from '../../constants/Colors';
 
-const Question = () => {
+const Question = (props) => {
     return (
         <View style={{flex:1}}>
           <Text style={{
@@ -14,9 +14,7 @@ const Question = () => {
               width:300,
               height: 106,
               }}> 
-            Hur mycket har din hud kliat, 
-            svidit, bränt och stuckit den 
-            senaste veckan?
+            {props.question}
           </Text>
         </View>
       );
