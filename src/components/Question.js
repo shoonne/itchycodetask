@@ -16,11 +16,11 @@ class Question extends Component {
   componentDidUpdate = (prevProps, prevState) => {
     if(prevProps !== this.props){
       this.spinValue.setValue(0)
-      Animated.timing(                  // Animate over time
-        this.spinValue,            // The animated value to drive
+      Animated.timing(   // Animate over time
+        this.spinValue,  // The animated value to drive
         {
-          toValue: 1,                   // Animate to opacity: 1 (opaque)
-          duration: 500,              // Make it take a while
+          toValue: 1,    // Animate to opacity: 1 (opaque)
+          duration: 500, // Make it take a while
         }
       ).start(); 
     }

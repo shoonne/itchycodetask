@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Text} from 'react-native';
+import {TouchableOpacity, Text, View} from 'react-native';
 import color from '../../constants/Colors';
 
 
@@ -10,6 +10,8 @@ const Button = (props) => {
           style={styles.btn}>
           <Text style={styles.btnText}>{props.text}</Text>
         </TouchableOpacity>
+
+
     )
 };
 
@@ -21,13 +23,13 @@ const styles = {
         backgroundColor:color.buttonBackground, 
         justifyContent:'center',
         marginBottom:10,
-    
+        opacity:0.7,
       },
       btnText: {
         textAlign:'center', 
         color: color.textColor,
-        fontFamily:'Poppins-Bold'
-      }
+        fontFamily:'Poppins-Bold',
+      },
 };
 
 export default Button;
