@@ -1,20 +1,19 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import color from '../../constants/Colors';;
+import color from '../../constants/Colors';
 
 
 
 const Header = (props) => {
     return (
         <View style={{top:51}}>
-
-        <Text style={styles.header}>
-            {props.text}
-        </Text>
+            <Text style={styles.header}>
+                {props.text}
+            </Text>
         </View>
 
     )
-}
+};
 
 const styles = {
     header: {

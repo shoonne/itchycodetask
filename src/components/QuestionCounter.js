@@ -7,19 +7,23 @@ const QuestionCounter = (props) => {
     return (
         <View style={{flex:1}}>
             <Text 
-            style={{
-                fontFamily:'Corben-Bold',
-                fontSize:20,
-                textAlign:'center',
-                letterSpacing: 0.9,
-                color:color.textColor,
-                top:102
-                }}
-            >
+            style={styles.text}
+                >
                 Fråga {props.questionNumber} av 10
             </Text>
         </View>
     )
+}
+
+const styles = {
+    text: {
+        fontFamily:'Corben-Bold',
+        fontSize:20,
+        textAlign:'center',
+        letterSpacing: 0.9,
+        color:color.textColor,
+        top:102
+    }
 }
 
 export default QuestionCounter;
