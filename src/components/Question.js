@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
 import { Text, Animated } from 'react-native';
 import color from '../../constants/Colors';
 
