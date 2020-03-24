@@ -1,20 +1,25 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import color from '../../constants/Colors';
 
 const TextButton = (props) => {
     return (
-        <Text style={styles.text}>{props.text}</Text>
+        <TouchableOpacity style={styles.container} onPress={props.onPress}>
+         <Text style={styles.text}>{props.text}</Text>
+        </TouchableOpacity>
     );
 }
 
 const styles = {
+    container: {
+        justifyContent:'center',         
+        bottom:50,
+        position:'absolute'
+    },
     text: {
         textAlign:'center',
         fontFamily:'Poppins-Bold',
         color: color.textColor,
-        bottom:40,
-        position:'absolute'
     }
 }
 

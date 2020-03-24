@@ -22,7 +22,7 @@ const styles = {
         textAlign:'center',
         letterSpacing: 0.9,
         color:color.textColor,
-        top:102
+        top:90
     }
 }
 

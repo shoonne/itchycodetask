@@ -101,7 +101,13 @@ const App = () => {
                 </View>
             }
             
-            {showTextBtn ? <TextButton text={"Ej tillämpligt"}/> : null}
+            {
+                showTextBtn ?
+                <TextButton 
+                onPress={() => setQuestionNumber(questionNumber + 1)} 
+                text={"Ej tillämpligt"}/>
+                : null 
+            }
 
           </View>
 

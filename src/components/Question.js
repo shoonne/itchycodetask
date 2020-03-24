@@ -28,7 +28,7 @@ class Question extends Component {
 
     render() {
       return (
-        <Animated.View style={{flex:1, opacity: this.state.fadeAnim,}}>
+        <Animated.View style={{flex:1, opacity: this.state.fadeAnim, marginBottom:100}}>
             <Text style={styles.text}>
               {this.props.question}
             </Text>
