@@ -1,88 +1,76 @@
-import React, { Component, useState, useReducer, useEffect } from 'react';
-import { View,Text, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 import Question from './src/components/Question';
 import QuestionCounter from './src/components/QuestionCounter';
 import color from './constants/Colors';
 import questions from './constants/Questions';
-
-let arr = []
-let question = 0
-
-const initialState = {count:0};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'INCREMENT_BY_3':
-      return {count: state.count + 3};
-    default:
-      throw new Error();
-  }
-}
+import Button from './src/components/Button';
 
 function convertData(arr) {
-var newArr = arr.reduce(function(result, current) {
-  return Object.assign(result, current);
-}, {});
+  // Convert data to desired format. 
+  var newArr = arr.reduce(function(res, current) {
+    return Object.assign(res, current);
+  }, {});
 
-return newArr;
+  return newArr;
 }
 
-const App = () => {
-  var scope = this;
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const [points, setPoint] = useState(0);
-  const [data, setData] = useState([]);
 
-  if(points === 10) {
-    setPoint(0)
-    setData(convertData(data));
+const App = () => {
+  // This is for controlling the active question
+  const [questionNumber, setQuestionNumber] = useState(0);
+  // This is for collection the data from questions
+  const [data, setData] = useState([]);
+  // This is used to store the desired format 
+  const [result, setResult] = useState()
+
+  // This is for the key in the result object
+  let activeQuestion = (questionNumber + 1).toString();
+
+  // If we have reached the 10th question, 
+  // reset the states and convert and store the result 
+  if(questionNumber === 10) {
+    setQuestionNumber(0)
+    setResult(convertData(data));
+    setData([])
   }
 
-  useEffect(() => {
-    console.log(data)
-  })
 
     return (
       <View style={styles.container}>
         <QuestionCounter 
-        questionNumber={points}/>
-        <Question 
-        question={questions[points >= 10 ? 0 : points].question}/>
-        <View style={{flex:1}}>
-        </View>
+        questionNumber={questionNumber}/>
+        <Question question={questions[questionNumber >= 10 ? 0 : questionNumber].question}/>
         <View>
-          <TouchableOpacity 
-          onPress={() => { 
-            setPoint(points + 1);
-            setData([...data, {['Question ' + (points + 1).toString()]: 3}])
+          <Button
+            text={"Väldigt mycket"}
+            onPress={() => {
+              setQuestionNumber(questionNumber + 1);
+              setData([...data, {[`Question${activeQuestion}`]: 3}])
+              }}
+            />
+
+          <Button
+          text={"En hel del"}
+          onPress={() => {
+            setQuestionNumber(questionNumber + 1);
+            setData([...data, {[`Question${activeQuestion}`]: 2}])
             }}
-          style={styles.btn}>
-            <Text style={styles.btnText}>Väldigt Mycket</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
+          />
+          <Button
+          text={"Lite grann"}
           onPress={() => {
-            setPoint(points + 1);
-            setData([...data, {['Question ' + (points + 1).toString()]: 2}])
-          }}
-          style={styles.btn}>
-            <Text style={styles.btnText}>En hel del</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
+            setQuestionNumber(questionNumber + 1);
+            setData([...data, {[`Question${activeQuestion}`]: 1}])
+            }}
+          />
+          <Button
+          text={"Inte alls"}
           onPress={() => {
-            setPoint(points + 1);
-            setData([...data, {['Question ' + (points + 1).toString()]: 1}])
-          }}
-          style={styles.btn}>
-            <Text style={styles.btnText}>Lite grann</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-          onPress={() => {
-            setPoint(points + 1);
-            setData([...data, {['Question ' + (points + 1).toString()]: 0}])
-          }}
-          style={styles.btn}>
-            <Text style={styles.btnText}>Inte alls</Text>
-          </TouchableOpacity>
+            setQuestionNumber(questionNumber + 1);
+            setData([...data, {[`Question${activeQuestion}`]: 0}])
+            }}
+          />
         </View>
       </View>
     );
@@ -94,22 +82,6 @@ const styles = {
     alignItems:'center',
     backgroundColor:color.background
   },
-
-  btn : {
-    width: 330, 
-    height:50, 
-    borderRadius: 26, 
-    backgroundColor:color.buttonBackground, 
-    justifyContent:'center',
-    marginBottom:10,
-
-  },
-
-  btnText: {
-    textAlign:'center', 
-    color: color.textColor
-  }
-
 }
 
 export default App;
