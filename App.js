@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, Animated } from 'react-native';
 import Question from './src/components/Question';
 import QuestionCounter from './src/components/QuestionCounter';
 import color from './constants/Colors';
@@ -12,33 +12,37 @@ function convertData(arr) {
   // Convert data to desired format. 
   var result = arr.reduce(function(res, current) {
     return Object.assign(res, current);
-  }, {});
+  }, {}, 0);
 
   return result;
 };
 
 
-
 const App = () => {
+
   const [questionNumber, setQuestionNumber] = useState(0); // This is for controlling the active question
   const [data, setData] = useState([]);   // This is for collection the data from questions
   const [result, setResult] = useState()  // This is used to store the desired format ;
+  //const [showFollowUp, setShowFollUp] = useState(false)
+  let isMax = questionNumber === 10;
+
+
+
 
   // If we have reached the 10th question, 
   // reset the states and convert and store the result 
-  if(questionNumber === 10) {
+  if(data && questionNumber === 10) {
     setQuestionNumber(0)
     setResult(convertData(data));
     setData([])
   }
 
 
-
-  // useEffect(()=> {
-  //   if(result) {
-  //     console.log(result)
-  //   }
-  // })
+  useEffect(()=> {
+    if(result) {
+      console.log(result)
+    }
+  })
 
 
     return (
@@ -46,12 +50,19 @@ const App = () => {
       <Overlay questionNumber={questionNumber}/>
       <Header text="Välmående DLQ!"/>
       <QuestionCounter questionNumber={questionNumber + 1}/>
-      <Question question={questionsData[questionNumber === 10 ? 0 : questionNumber].question}/>
+      <Question 
+      question={questionsData[isMax ? 0 : questionNumber].question}
+
+        />
       
-      {  questionNumber === 7 ? 
+      {  questionNumber === 6 ? 
         <View style={{marginBottom:100}}>
-          <Button onPress={() => setQuestionNumber(questionNumber + 1)} text="Ja"/>
-          <Button text="Nej"/>
+          <Button onPress={() => {
+          setQuestionNumber(questionNumber + 1)
+          setData([...data, {[questionsData[questionNumber].name]: 3}])
+          }} text="Ja"/>
+          <Button onPress={() => {
+          }} text="Nej"/>
         </View>   
         :   
         <View style={{marginBottom: 100, zIndex:2}}>

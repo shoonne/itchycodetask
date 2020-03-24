@@ -1,13 +1,41 @@
-import React from 'react';
-import { Text } from 'react-native';
+import React, {Component, useState} from 'react';
+import { Text, Animated } from 'react-native';
 import color from '../../constants/Colors';
 
-const Question = (props) => {
-    return (
-          <Text style={styles.text}>
-            {props.question}
-          </Text>
-      );
+class Question extends Component {
+  constructor(props) {
+    super(props)
+    this.spinValue = new Animated.Value(1)
+    this.state = {
+      fadeAnim: this.spinValue,  // Initial value for opacity: 0
+
+    };
+  };
+
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if(prevProps !== this.props){
+      this.spinValue.setValue(0)
+      Animated.timing(                  // Animate over time
+        this.spinValue,            // The animated value to drive
+        {
+          toValue: 1,                   // Animate to opacity: 1 (opaque)
+          duration: 500,              // Make it take a while
+        }
+      ).start(); 
+    }
+  }
+
+    render() {
+      return (
+        <Animated.View style={{flex:1, opacity: this.state.fadeAnim,}}>
+            <Text style={styles.text}>
+              {this.props.question}
+            </Text>
+        </Animated.View>
+  
+        );
+    }
 };
 
 const styles = {
