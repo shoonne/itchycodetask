@@ -9,12 +9,11 @@ const QuestionCounter = (props) => {
             <Text 
             style={{
                 fontFamily:'Corben-Bold',
-                fontSize:18,
+                fontSize:20,
                 textAlign:'center',
                 letterSpacing: 0.9,
                 color:color.textColor,
-                top:102,
-                height:34
+                top:102
                 }}
             >
                 Fråga {props.questionNumber} av 10

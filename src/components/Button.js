@@ -27,7 +27,8 @@ const styles = {
     
       btnText: {
         textAlign:'center', 
-        color: color.textColor
+        color: color.textColor,
+        fontFamily:'Poppins-Bold'
       }
 }
 
