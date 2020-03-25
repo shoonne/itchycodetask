@@ -3,7 +3,7 @@ import {View} from 'react-native'
 import color from '../../constants/Colors';
 
 
-
+// Decrease the width with every question
 function renderWidth(page) {
     switch (page) {
       case 1:

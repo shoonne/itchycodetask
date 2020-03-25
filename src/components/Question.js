@@ -8,11 +8,11 @@ class Question extends Component {
     this.spinValue = new Animated.Value(1)
     this.state = {
       fadeAnim: this.spinValue,  // Initial value for opacity: 0
-
     };
   };
 
 
+  // Reset Animation 
   componentDidUpdate = (prevProps, prevState) => {
     if(prevProps !== this.props){
       this.spinValue.setValue(0)
@@ -28,7 +28,9 @@ class Question extends Component {
 
     render() {
       return (
-        <Animated.View style={{flex:1, opacity: this.state.fadeAnim, marginBottom:100}}>
+        <Animated.View 
+        style={{flex:1, opacity: this.state.fadeAnim, marginBottom:100}}
+        >
             <Text style={styles.text}>
               {this.props.question}
             </Text>
